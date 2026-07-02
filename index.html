@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dossiês de Justa Causa</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --ink:#172033;
+      --muted:#667085;
+      --line:#d9e0ea;
+      --brand:#153b5c;
+      --brand-2:#1e6b8f;
+      --accent:#f3b23c;
+      --danger:#b42318;
+      --danger-bg:#fff0ed;
+      --ok:#047857;
+      --ok-bg:#ecfdf3;
+      --warn:#b54708;
+      --warn-bg:#fffaeb;
+      --info:#175cd3;
+      --info-bg:#eff8ff;
+      --shadow:0 10px 30px rgba(16,24,40,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    header{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;padding:26px 20px 30px;position:sticky;top:0;z-index:20;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+    .wrap{max-width:1220px;margin:0 auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:14px;background:white;color:var(--brand);font-weight:900;display:grid;place-items:center;letter-spacing:-1px;box-shadow:var(--shadow)}
+    h1{margin:0;font-size:25px;line-height:1.1}.subtitle{margin:6px 0 0;color:#d9ecf7;font-size:14px}
+    .header-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.sync-badge{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.12);color:white;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:900;white-space:nowrap}.sync-badge.ok{background:rgba(4,120,87,.28)}.sync-badge.warn{background:rgba(181,71,8,.30)}.sync-badge.danger{background:rgba(180,35,24,.30)}.btn{border:0;border-radius:12px;padding:10px 13px;font-weight:700;cursor:pointer;background:#e9eef5;color:var(--ink);display:inline-flex;gap:8px;align-items:center;justify-content:center;transition:.18s;min-height:40px}.btn:hover{transform:translateY(-1px);filter:brightness(.98)}.btn.primary{background:var(--accent);color:#1d2939}.btn.dark{background:#0b253a;color:white}.btn.ghost{background:rgba(255,255,255,.14);color:white;border:1px solid rgba(255,255,255,.24)}.btn.danger{background:var(--danger-bg);color:var(--danger)}.btn.small{font-size:12px;padding:7px 9px;border-radius:10px;min-height:32px}.btn.linkish{background:transparent;color:var(--brand);padding:4px;min-height:auto}
+    main{max-width:1220px;margin:24px auto;padding:0 16px 46px}.layout{display:grid;grid-template-columns:310px 1fr;gap:18px}.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.sidebar{padding:15px;height:fit-content;position:sticky;top:126px}.section-title{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 12px}.search{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;font-size:14px;margin:0 0 12px}.employee-list{display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 315px);overflow:auto;padding-right:4px}.emp-card{border:1px solid var(--line);background:#fff;border-radius:15px;padding:12px;cursor:pointer;transition:.18s}.emp-card:hover{border-color:#9db6cc}.emp-card.active{border-color:var(--brand-2);box-shadow:0 0 0 3px rgba(30,107,143,.12)}.emp-name{font-weight:900;margin:0 0 4px;font-size:15px}.emp-meta{color:var(--muted);font-size:12px;line-height:1.35}.progress{margin-top:10px;height:9px;background:#edf2f7;border-radius:999px;overflow:hidden}.progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand-2),var(--accent));width:0}.content{min-width:0}.hero{padding:18px 20px;margin-bottom:16px}.hero-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}.hero h2{margin:0;font-size:23px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.chip{font-size:12px;font-weight:800;border-radius:999px;padding:6px 9px;background:#edf2f7;color:#344054}.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.warn{background:var(--warn-bg);color:var(--warn)}.chip.info{background:var(--info-bg);color:var(--info)}.chip.danger{background:var(--danger-bg);color:var(--danger)}.stats{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:12px;margin-top:16px}.stat{border:1px solid var(--line);border-radius:15px;padding:12px;background:#fbfcfe}.stat strong{font-size:21px;display:block}.stat span{font-size:12px;color:var(--muted);font-weight:700}.tabs{display:flex;gap:8px;overflow:auto;padding:12px 12px 0}.tab{border:1px solid var(--line);background:#fff;border-radius:12px 12px 0 0;padding:11px 13px;font-weight:900;color:var(--muted);cursor:pointer;white-space:nowrap}.tab.active{color:var(--brand);border-bottom-color:#fff}.tab-content{padding:18px}.tab-panel{display:none}.tab-panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:900;color:#344054}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 11px;font-size:14px;background:#fff;color:var(--ink)}textarea{resize:vertical;min-height:90px}.full{grid-column:1/-1}.row-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.toolbar-left,.toolbar-right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{border-collapse:collapse;width:100%;background:#fff}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#f8fafc}tr:last-child td{border-bottom:0}.status{font-size:12px;font-weight:900;border-radius:999px;padding:5px 8px;display:inline-block;white-space:nowrap}.s-pendente{background:#f2f4f7;color:#475467}.s-em-elaboracao{background:var(--info-bg);color:var(--info)}.s-recebido{background:#eef4ff;color:#3538cd}.s-concluido{background:var(--ok-bg);color:var(--ok)}.s-nao-aplicavel{background:#f9fafb;color:#667085}.s-recomendado{background:var(--warn-bg);color:var(--warn)}.s-incompleto{background:var(--danger-bg);color:var(--danger)}.checklist-item{border:1px solid var(--line);border-radius:15px;padding:13px;margin-bottom:10px;background:#fff}.check-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.check-title{font-weight:900;margin:0 0 5px}.check-desc{margin:0;color:var(--muted);font-size:13px;line-height:1.45}.check-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.evidence-card{border:1px solid var(--line);border-radius:15px;padding:14px;background:#fff;margin-bottom:10px}.evidence-card h4{margin:0 0 6px}.evidence-card p{margin:4px 0;color:var(--muted);font-size:13px;line-height:1.45}.timeline{position:relative;margin-left:11px}.timeline:before{content:"";position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:var(--line)}.event{position:relative;padding-left:34px;margin-bottom:15px}.event:before{content:"";position:absolute;left:2px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid #fff;box-shadow:0 0 0 1px var(--line)}.event strong{display:block}.event span{color:var(--muted);font-size:13px}.report-box{border:1px solid var(--line);border-radius:15px;background:#fff;padding:18px;line-height:1.55}.report-box h3{margin-top:0}.report-box h4{margin-bottom:5px}.report-box ul{margin-top:5px}.empty{padding:28px;border:1px dashed var(--line);border-radius:16px;background:#fff;text-align:center;color:var(--muted)}.modal-back{position:fixed;inset:0;background:rgba(10,18,30,.58);z-index:50;display:none;align-items:center;justify-content:center;padding:18px}.modal{background:white;border-radius:20px;max-width:820px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 28px 80px rgba(0,0,0,.3)}.modal-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modal-head h3{margin:0}.modal-body{padding:18px}.modal-foot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}.toast{position:fixed;right:18px;bottom:18px;background:#101828;color:white;border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);display:none;z-index:80;font-weight:700}.hint{font-size:12px;color:var(--muted);line-height:1.45}.divider{height:1px;background:var(--line);margin:14px 0}.danger-zone{border:1px solid #fecdc8;background:#fff7f5;border-radius:15px;padding:13px}.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.filter-row select{border:1px solid var(--line);border-radius:12px;padding:9px;background:#fff}.mobile-only{display:none}
+    @media (max-width:880px){header{position:static}.layout{grid-template-columns:1fr}.sidebar{position:static}.employee-list{max-height:none}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.mobile-only{display:inline-flex}.desktop-hint{display:none}}
+    @media print{header,.sidebar,.tabs,.toolbar,.row-actions,.btn,.modal-back,.toast,.danger-zone{display:none!important}main{margin:0;padding:0}.layout{display:block}.panel{box-shadow:none;border:0}.tab-panel{display:block!important}.tab-panel:not(#reportPanel){display:none!important}.report-box{border:0;padding:0}.content{width:100%}body{background:white}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="logo">RH</div>
+      <div>
+        <h1>Dossiês de Justa Causa</h1>
+        <p class="subtitle">Controle por funcionário · investigação geral · checklist · evidências · relatório</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn ghost" onclick="openGeneralInvestigation()">Investigação Geral</button>
+      <span id="syncStatus" class="sync-badge warn">Firebase: iniciando...</span>
+      <button class="btn ghost" onclick="forceFirebaseSave()">Sincronizar agora</button>
+      <button class="btn ghost" onclick="exportJSON()">Backup JSON</button>
+      <button class="btn ghost" onclick="document.getElementById('jsonInput').click()">Importar JSON</button>
+      <input id="jsonInput" type="file" accept="application/json" style="display:none" onchange="importJSON(event)">
+      <button class="btn primary" onclick="openEmployeeModal()">+ Novo funcionário</button>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="layout">
+    <aside class="panel sidebar">
+      <p class="section-title">Funcionários</p>
+      <input class="search" id="searchEmployee" placeholder="Buscar funcionário..." oninput="renderEmployees()" />
+      <div class="filter-row">
+        <select id="statusFilter" onchange="renderEmployees()">
+          <option value="">Todos os status</option>
+          <option>Em montagem</option>
+          <option>Dossiê incompleto</option>
+          <option>Justa aplicada</option>
+          <option>Concluído</option>
+          <option>Arquivado</option>
+        </select>
+      </div>
+      <div id="employeeList" class="employee-list"></div>
+      <div class="divider"></div>
+      <button class="btn dark" style="width:100%" onclick="generateGeneralReport()">Gerar relatório geral</button>
+      <p class="hint desktop-hint">Dica: use o relatório individual para fechar cada pasta do funcionário.</p>
+    </aside>
+
+    <section class="content">
+      <div id="emptyState" class="empty" style="display:none">
+        <h2>Nenhum funcionário selecionado</h2>
+        <p>Cadastre ou selecione um funcionário para abrir o dossiê individual.</p>
+        <button class="btn primary" onclick="openEmployeeModal()">Cadastrar funcionário</button>
+      </div>
+
+      <div id="employeeArea" style="display:none">
+        <div class="panel hero">
+          <div class="hero-row">
+            <div>
+              <h2 id="heroName"></h2>
+              <div class="chips" id="heroChips"></div>
+            </div>
+            <div class="row-actions" style="margin-top:0">
+              <button class="btn" onclick="openEmployeeModal(selectedEmployeeId)">Editar dados</button>
+              <button class="btn danger" onclick="deleteEmployee(selectedEmployeeId)">Excluir funcionário</button>
+            </div>
+          </div>
+          <div class="stats" id="stats"></div>
+        </div>
+
+        <div class="panel">
+          <div class="tabs">
+            <button class="tab active" data-tab="dataPanel" onclick="setTab('dataPanel')">Dados</button>
+            <button class="tab" data-tab="checklistPanel" onclick="setTab('checklistPanel')">Checklist</button>
+            <button class="tab" data-tab="evidencePanel" onclick="setTab('evidencePanel')">Evidências</button>
+            <button class="tab" data-tab="timelinePanel" onclick="setTab('timelinePanel')">Linha do tempo</button>
+            <button class="tab" data-tab="reportPanel" onclick="setTab('reportPanel'); renderIndividualReport();">Relatório</button>
+          </div>
+          <div class="tab-content">
+            <div id="dataPanel" class="tab-panel active"></div>
+            <div id="checklistPanel" class="tab-panel"></div>
+            <div id="evidencePanel" class="tab-panel"></div>
+            <div id="timelinePanel" class="tab-panel"></div>
+            <div id="reportPanel" class="tab-panel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Modal</h3>
+      <button class="btn small" onclick="closeModal()">Fechar</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script>
+const STORAGE_KEY = 'raguife_dossies_justa_causa_v4_firebase';
+const FIREBASE_DOC_PATH = ['dossies', 'principal'];
+const firebaseConfig = {
+  apiKey: "AIzaSyBCNu0v9IhzNczq9p5v-NJt15_OSjKy_KE",
+  authDomain: "dossie-ed6b5.firebaseapp.com",
+  projectId: "dossie-ed6b5",
+  storageBucket: "dossie-ed6b5.firebasestorage.app",
+  messagingSenderId: "91135190754",
+  appId: "1:91135190754:web:9b6b7ea7169c5bb1e660bb"
+};
+const statusClass = {
+  'Pendente':'s-pendente','Em elaboração':'s-em-elaboracao','Recebido':'s-recebido','Concluído':'s-concluido','Não aplicável':'s-nao-aplicavel','Recomendado':'s-recomendado','Incompleto':'s-incompleto'
+};
+const docStatuses = ['Pendente','Em elaboração','Recebido','Concluído','Não aplicável','Recomendado','Incompleto'];
+let selectedEmployeeId = null;
+let app = loadData();
+let db = null;
+let cloudDoc = null;
+let cloudSaveTimer = null;
+let cloudSyncStarted = false;
+let applyingRemoteData = false;
+const clientId = localStorage.getItem('raguife_dossie_client_id') || ('client_' + Math.random().toString(36).slice(2) + Date.now().toString(36));
+localStorage.setItem('raguife_dossie_client_id', clientId);
+
+function uid(){return 'id_' + Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4)}
+function todayBR(){return new Date().toLocaleDateString('pt-BR')}
+function escapeHTML(v){return String(v ?? '').replace(/[&<>'"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[s]))}
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(app));
+  if(!applyingRemoteData) queueCloudSave();
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2300)}
+function setSyncStatus(msg,type='warn'){
+  const el=document.getElementById('syncStatus');
+  if(!el) return;
+  el.textContent=msg;
+  el.className='sync-badge ' + type;
+}
+function localSaveOnly(){localStorage.setItem(STORAGE_KEY, JSON.stringify(app));}
+function initFirebaseSync(){
+  try{
+    if(!window.firebase){setSyncStatus('Firebase: SDK não carregado','danger'); return;}
+    if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    cloudDoc = db.collection(FIREBASE_DOC_PATH[0]).doc(FIREBASE_DOC_PATH[1]);
+    cloudSyncStarted = true;
+    setSyncStatus('Firebase: conectando...','warn');
+    cloudDoc.onSnapshot(async (snapshot)=>{
+      if(!snapshot.exists){
+        setSyncStatus('Firebase: criando base...','warn');
+        await cloudDoc.set({payload: app, updatedAt: firebase.firestore.FieldValue.serverTimestamp(), updatedBy: clientId, version: 1});
+        setSyncStatus('Firebase: sincronizado','ok');
+        return;
+      }
+      const data = snapshot.data() || {};
+      if(data.payload && data.updatedBy !== clientId){
+        applyingRemoteData = true;
+        app = data.payload;
+        localSaveOnly();
+        if(!getEmployee(selectedEmployeeId)) selectedEmployeeId = app.employees?.[0]?.id || null;
+        render();
+        applyingRemoteData = false;
+        setSyncStatus('Firebase: atualizado','ok');
+        toast('Dados atualizados pelo Firebase.');
+      }else{
+        setSyncStatus('Firebase: sincronizado','ok');
+      }
+    }, (error)=>{
+      console.error('Erro no Firebase:', error);
+      setSyncStatus('Firebase: erro de permissão/conexão','danger');
+      toast('Erro ao conectar no Firebase. Confira Firestore e regras.');
+    });
+  }catch(error){
+    console.error(error);
+    setSyncStatus('Firebase: erro ao iniciar','danger');
+  }
+}
+function queueCloudSave(){
+  if(!cloudSyncStarted || !cloudDoc) return;
+  clearTimeout(cloudSaveTimer);
+  setSyncStatus('Firebase: salvando...','warn');
+  cloudSaveTimer = setTimeout(async()=>{
+    try{
+      await cloudDoc.set({payload: app, updatedAt: firebase.firestore.FieldValue.serverTimestamp(), updatedBy: clientId, version: 1},{merge:true});
+      setSyncStatus('Firebase: sincronizado','ok');
+    }catch(error){
+      console.error('Erro ao salvar no Firebase:', error);
+      setSyncStatus('Firebase: erro ao salvar','danger');
+      toast('Não salvou no Firebase. Verifique regras/permissões.');
+    }
+  }, 600);
+}
+function forceFirebaseSave(){
+  if(!cloudDoc){toast('Firebase ainda não conectado.'); return;}
+  clearTimeout(cloudSaveTimer);
+  setSyncStatus('Firebase: salvando...','warn');
+  cloudDoc.set({payload: app, updatedAt: firebase.firestore.FieldValue.serverTimestamp(), updatedBy: clientId, version: 1},{merge:true})
+    .then(()=>{setSyncStatus('Firebase: sincronizado','ok'); toast('Base enviada para o Firebase.');})
+    .catch(error=>{console.error(error); setSyncStatus('Firebase: erro ao salvar','danger'); toast('Erro ao salvar no Firebase.');});
+}
+function loadData(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved) return JSON.parse(saved);
+  }catch(e){console.warn(e)}
+  return defaultData();
+}
+function defaultData(){
+  return {
+  "investigation": {
+    "title": "Investigação Interna — Frete Retorno e Condutas Correlatas",
+    "company": "Raguife Indústria e Comércio de Rações Ltda.",
+    "startDate": "19/06/2026",
+    "notes": "Pasta-mãe da apuração. Os dossiês individuais compõem a investigação geral e devem ser anexados ao relatório final de encerramento. Versão atualizada com Alcino Alves Neto, Eduardo Galter, Rogério Ferreira de Souza e Ueliton André Soares.",
+    "documents": [
+      {
+        "id": "inv-01",
+        "code": "INV-01",
+        "name": "Termo de Relato de Recebimento de Denúncia Interna",
+        "status": "Pendente",
+        "responsible": "Newton Carlos Dourado",
+        "date": "19/06/2026",
+        "notes": "Registrar recebimento de relato espontâneo e repasse ao responsável."
+      },
+      {
+        "id": "inv-02",
+        "code": "INV-02",
+        "name": "Termo de Encaminhamento de Denúncia e Início de Apuração",
+        "status": "Pendente",
+        "responsible": "Vinícius Alves de Lima",
+        "date": "19/06/2026",
+        "notes": "Registrar ciência, reiteração do relato e comunicação à diretoria."
+      },
+      {
+        "id": "inv-03",
+        "code": "INV-03",
+        "name": "Termos de Declaração Espontânea",
+        "status": "Pendente",
+        "responsible": "Declarantes",
+        "date": "19/06/2026",
+        "notes": "Registrar versões espontâneas prestadas por empregados/testemunhas."
+      },
+      {
+        "id": "inv-04",
+        "code": "INV-04",
+        "name": "Termos de Avanço da Investigação",
+        "status": "Em elaboração",
+        "responsible": "Comissão investigadora",
+        "date": "",
+        "notes": "Registrar diligências, visitas, obtenção de tickets, notas, prints e demais provas."
+      },
+      {
+        "id": "inv-05",
+        "code": "INV-05",
+        "name": "Relatório Final de Encerramento da Investigação",
+        "status": "Pendente",
+        "responsible": "Comissão investigadora",
+        "date": "",
+        "notes": "Narrar toda a investigação, anexar dossiês individuais e concluir."
+      }
+    ]
+  },
+  "employees": [
+    {
+      "id": "alcino-alves-neto",
+      "name": "Alcino Alves Neto",
+      "cpf": "449.752.478-79",
+      "role": "Motorista de caminhão",
+      "unit": "Santa Fé do Sul/SP",
+      "vehicle": "Rodotrem - ENN8F53",
+      "plate": "ENN8F53",
+      "status": "Dossiê incompleto",
+      "investigationDate": "30/06/2026",
+      "dismissalDate": "30/06/2026",
+      "responsible": "Vinícius Alves de Lima / Newton Carlos Dourado",
+      "summary": "Apuração individual relacionada a desvio de rota, evasão de pontos de pesagem, carregamento adicional em operação de frete retorno, ausência de regularização documental e recebimento de valores por fora, conforme termo de oitiva, aviso de dispensa e prints de rastreamento.",
+      "checklist": [
+        {
+          "id": "alcino-check-01",
+          "name": "Termo de Oitiva e Manifestação do Empregado",
+          "required": true,
+          "status": "Concluído",
+          "date": "30/06/2026",
+          "responsible": "RH / Comissão investigadora",
+          "notes": "Empregado manifestou-se livremente e assinou o termo."
+        },
+        {
+          "id": "alcino-check-02",
+          "name": "Aviso de Dispensa por Justa Causa",
+          "required": true,
+          "status": "Concluído",
+          "date": "30/06/2026",
+          "responsible": "RH",
+          "notes": "Fundamento utilizado: art. 482, alínea “a”, da CLT — ato de improbidade."
+        },
+        {
+          "id": "alcino-check-03",
+          "name": "Relatório de Rastreamento / Desvio de Rota",
+          "required": true,
+          "status": "Recebido",
+          "date": "",
+          "responsible": "Frota / Logística",
+          "notes": "Há prints de rastreamento. Recomenda-se formalizar relatório narrativo assinado."
+        },
+        {
+          "id": "alcino-check-04",
+          "name": "Comparativo Rota Esperada x Rota Realizada",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Logística / Frota",
+          "notes": "Necessário para demonstrar objetivamente o desvio de rota."
+        },
+        {
+          "id": "alcino-check-05",
+          "name": "Relatório de Prejuízo por Divergência de Peso",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Financeiro / Logística",
+          "notes": "Vincular peso documentado, peso efetivo e valor por tonelada."
+        },
+        {
+          "id": "alcino-check-06",
+          "name": "Relatório de Prejuízo Operacional por Desvio de Rota",
+          "required": false,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Frota / Financeiro",
+          "notes": "Calcular quilometragem, combustível, tempo, pedágio e desgaste, se aplicável."
+        },
+        {
+          "id": "alcino-check-07",
+          "name": "Termo Complementar de Transcrição e Indicação de Envolvidos",
+          "required": false,
+          "status": "Recomendado",
+          "date": "",
+          "responsible": "Comissão investigadora",
+          "notes": "Recomendado porque a oitiva manuscrita cita terceiros e suposto PIX."
+        },
+        {
+          "id": "alcino-check-08",
+          "name": "Relatório Individual de Conclusão",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Vinícius Alves de Lima / Comissão investigadora",
+          "notes": "Peça central do dossiê. Deve consolidar fatos, provas, oitiva, prejuízo, quebra de confiança e medida aplicada."
+        }
+      ],
+      "evidences": [
+        {
+          "id": "alcino-ev-01",
+          "title": "Termo de Oitiva e Manifestação do Empregado",
+          "type": "Termo",
+          "date": "30/06/2026",
+          "status": "Recebido",
+          "fileName": "TERMO DE OITIVA E MANIFESTAÇÃO DO EMPREGADO.pdf",
+          "summary": "Documento registra que o empregado foi chamado para esclarecer desvio de rota e apresentou manifestação livre, com assinatura do empregado e testemunhas."
+        },
+        {
+          "id": "alcino-ev-02",
+          "title": "Aviso de Dispensa por Justa Causa",
+          "type": "Aviso",
+          "date": "30/06/2026",
+          "status": "Recebido",
+          "fileName": "AVISO DE DISPENSA POR JUSTA CAUSA.pdf",
+          "summary": "Documento formaliza a justa causa por ato de improbidade, mencionando desvio de rota, evasão de pesagem, carregamento adicional, ausência de regularização documental e recebimento de valores por fora."
+        },
+        {
+          "id": "alcino-ev-03",
+          "title": "Relatório de Rastreamento — Desvio de Rota",
+          "type": "Rastreamento",
+          "date": "19/04/2026, 01/06/2026 e 03/06/2026",
+          "status": "Recebido",
+          "fileName": "RELATÓRIO DE RASTRAMENTO - DESVIO DE ROTA.pdf",
+          "summary": "Prints indicam registros de rota/paradas do Rodotrem ENN8F53, vinculado ao motorista Alcino Alves Neto. Deve ser tratado como anexo e convertido em relatório narrativo."
+        }
+      ],
+      "timeline": [
+        {
+          "id": "alcino-tl-01",
+          "date": "19/04/2026",
+          "event": "Registro de parada no rastreamento",
+          "document": "Relatório de Rastreamento — Desvio de Rota",
+          "notes": "Veículo Rodotrem ENN8F53 vinculado ao motorista Alcino Alves Neto."
+        },
+        {
+          "id": "alcino-tl-02",
+          "date": "01/06/2026",
+          "event": "Registro de evento/parada no rastreamento",
+          "document": "Relatório de Rastreamento — Desvio de Rota",
+          "notes": "Print indica passagem/parada em região de fazenda."
+        },
+        {
+          "id": "alcino-tl-03",
+          "date": "03/06/2026",
+          "event": "Registro de rota/parada no rastreamento",
+          "document": "Relatório de Rastreamento — Desvio de Rota",
+          "notes": "Mapa amplo indica trajeto na região de Brasília/Planaltina/Formosa."
+        },
+        {
+          "id": "alcino-tl-04",
+          "date": "30/06/2026",
+          "event": "Oitiva e manifestação do empregado",
+          "document": "Termo de Oitiva e Manifestação",
+          "notes": "Empregado manifestou-se livremente e assinou."
+        },
+        {
+          "id": "alcino-tl-05",
+          "date": "30/06/2026",
+          "event": "Aplicação de justa causa",
+          "document": "Aviso de Dispensa por Justa Causa",
+          "notes": "Fundamento: art. 482, alínea “a”, CLT."
+        }
+      ]
+    },
+    {
+      "id": "eduardo-galter",
+      "name": "Eduardo Galter",
+      "cpf": "845.429.181-49",
+      "role": "Motorista de caminhão",
+      "unit": "Santa Fé do Sul/SP",
+      "vehicle": "",
+      "plate": "",
+      "status": "Dossiê incompleto",
+      "investigationDate": "19/06/2026",
+      "dismissalDate": "02/07/2026",
+      "responsible": "Vinícius Alves de Lima / Newton Carlos Dourado",
+      "summary": "Apuração individual relacionada a divergências de peso em mais de uma ocasião em operação de frete retorno, transporte de carga superior à documentação fiscal, ausência de pesagem/autorização e alegada vantagem financeira indevida. O empregado declarou discordar da designação por desvio de rota. Atenção: o aviso recebido está datado como 02/07/2027, embora a oitiva seja de 02/07/2026; recomenda-se retificação formal.",
+      "checklist": [
+        {
+          "id": "eduardo-check-01",
+          "name": "Termo de Oitiva e Manifestação do Empregado",
+          "required": true,
+          "status": "Concluído",
+          "date": "02/07/2026",
+          "responsible": "RH / Comissão investigadora",
+          "notes": "Empregado manifestou-se livremente, declarou discordar da designação por desvio de rota e assinou o termo."
+        },
+        {
+          "id": "eduardo-check-02",
+          "name": "Aviso de Dispensa por Justa Causa",
+          "required": true,
+          "status": "Recebido",
+          "date": "02/07/2026",
+          "responsible": "RH",
+          "notes": "Fundamento: art. 482, alínea “a”, CLT. Alerta: no documento consta 02/07/2027; recomenda-se reemissão ou termo de retificação para 2026."
+        },
+        {
+          "id": "eduardo-check-03",
+          "name": "Termo de Retificação da Data do Aviso",
+          "required": false,
+          "status": "Recomendado",
+          "date": "",
+          "responsible": "RH / Jurídico",
+          "notes": "Corrigir divergência de ano no aviso de justa causa, que aparece como 2027."
+        },
+        {
+          "id": "eduardo-check-04",
+          "name": "Tickets de Pesagem",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Logística / Frota",
+          "notes": "O aviso menciona tickets de pesagem; anexar os comprovantes correspondentes."
+        },
+        {
+          "id": "eduardo-check-05",
+          "name": "Documentação Fiscal / Notas / CT-e",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Logística / Fiscal",
+          "notes": "Anexar os documentos fiscais comparados com as pesagens."
+        },
+        {
+          "id": "eduardo-check-06",
+          "name": "Relatório de Apuração de Prejuízo por Divergência de Peso",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Financeiro / Logística",
+          "notes": "Apurar diferença de peso em cada ocorrência, converter em toneladas e calcular prejuízo estimado."
+        },
+        {
+          "id": "eduardo-check-07",
+          "name": "Relatório de Rastreamento / Comparativo de Rota",
+          "required": false,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Frota / Logística",
+          "notes": "Necessário se o desvio de rota permanecer como parte da fundamentação ou da narrativa do dossiê."
+        },
+        {
+          "id": "eduardo-check-08",
+          "name": "Relatório Individual de Conclusão",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Vinícius Alves de Lima / Comissão investigadora",
+          "notes": "Consolidar provas, manifestação do empregado, divergências, prejuízo, quebra de confiança e fundamento da justa causa."
+        }
+      ],
+      "evidences": [
+        {
+          "id": "eduardo-ev-01",
+          "title": "Termo de Oitiva e Manifestação do Empregado",
+          "type": "Termo",
+          "date": "02/07/2026",
+          "status": "Recebido",
+          "fileName": "TERMO DE OITIVA E MANIFESTAÇÃO DO EMPREGADO.pdf",
+          "summary": "Oitiva informa divergências entre peso aferido e peso da documentação fiscal, além de alteração de rota. Manifestação manuscrita: empregado declara discordar da designação por desvio de rota."
+        },
+        {
+          "id": "eduardo-ev-02",
+          "title": "Aviso de Dispensa por Justa Causa",
+          "type": "Aviso",
+          "date": "02/07/2026",
+          "status": "Recebido com ressalva",
+          "fileName": "AVISO DE DISPENSA POR JUSTA CAUSA.pdf",
+          "summary": "Aviso fundamentado no art. 482, alínea “a”, por ato de improbidade. Menciona apuração iniciada em 19/06/2026 e divergências de peso em mais de uma ocasião. Ressalva: documento consta com ano 2027 na data final."
+        }
+      ],
+      "timeline": [
+        {
+          "id": "eduardo-tl-01",
+          "date": "19/06/2026",
+          "event": "Início da apuração geral mencionada no aviso",
+          "document": "Aviso de Dispensa por Justa Causa",
+          "notes": "Documento informa que a apuração iniciada em 19/06 identificou divergências em mais de uma ocasião."
+        },
+        {
+          "id": "eduardo-tl-02",
+          "date": "02/07/2026",
+          "event": "Oitiva e manifestação do empregado",
+          "document": "Termo de Oitiva e Manifestação",
+          "notes": "Empregado declarou discordar da designação por desvio de rota."
+        },
+        {
+          "id": "eduardo-tl-03",
+          "date": "02/07/2026",
+          "event": "Aplicação de justa causa",
+          "document": "Aviso de Dispensa por Justa Causa",
+          "notes": "Fundamento: art. 482, alínea “a”, CLT. Conferir/retificar data impressa como 2027."
+        }
+      ]
+    },
+    {
+      "id": "rogerio-ferreira-de-souza",
+      "name": "Rogério Ferreira de Souza",
+      "cpf": "760.546.911-04",
+      "role": "Motorista de caminhão",
+      "unit": "Santa Fé do Sul/SP",
+      "vehicle": "",
+      "plate": "",
+      "status": "Dossiê incompleto",
+      "investigationDate": "29/06/2026",
+      "dismissalDate": "29/06/2026",
+      "responsible": "Vinícius Alves de Lima / Newton Carlos Dourado",
+      "summary": "Apuração individual relacionada a desvio de rota, trajeto fora da rota estipulada e evasão de rotas com pesagem. Justa causa fundamentada no art. 482, alínea “h”, da CLT, por indisciplina/insubordinação. A oitiva recebida está assinada, porém o campo de registro final não aparece marcado, exigindo atenção formal.",
+      "checklist": [
+        {
+          "id": "rogerio-check-01",
+          "name": "Termo de Oitiva e Manifestação do Empregado",
+          "required": true,
+          "status": "Recebido",
+          "date": "29/06/2026",
+          "responsible": "RH / Comissão investigadora",
+          "notes": "Termo assinado, mas sem marcação clara no registro final de manifestação ou recusa. Recomenda-se regularização/observação complementar."
+        },
+        {
+          "id": "rogerio-check-02",
+          "name": "Aviso de Dispensa por Justa Causa",
+          "required": true,
+          "status": "Concluído",
+          "date": "29/06/2026",
+          "responsible": "RH",
+          "notes": "Fundamento utilizado: art. 482, alínea “h”, da CLT — indisciplina/insubordinação."
+        },
+        {
+          "id": "rogerio-check-03",
+          "name": "Termo Complementar de Regularização da Oitiva",
+          "required": false,
+          "status": "Recomendado",
+          "date": "",
+          "responsible": "RH / Comissão investigadora",
+          "notes": "Registrar se houve manifestação, silêncio ou recusa, porque o campo final da oitiva não está marcado."
+        },
+        {
+          "id": "rogerio-check-04",
+          "name": "Relatório de Rastreamento / Desvio de Rota",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Frota / Logística",
+          "notes": "Necessário para demonstrar a rota realizada e os desvios."
+        },
+        {
+          "id": "rogerio-check-05",
+          "name": "Comparativo Rota Esperada x Rota Realizada",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Logística / Frota",
+          "notes": "Essencial para sustentar desvio de rota e evasão de pesagem."
+        },
+        {
+          "id": "rogerio-check-06",
+          "name": "Relatório de Prejuízo Operacional por Desvio de Rota",
+          "required": false,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Frota / Financeiro",
+          "notes": "Estimar km adicional, combustível, tempo, pedágio, desgaste e risco operacional."
+        },
+        {
+          "id": "rogerio-check-07",
+          "name": "Relatório Individual de Conclusão",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Vinícius Alves de Lima / Comissão investigadora",
+          "notes": "Consolidar rastreamento, oitiva, prejuízo/risco, quebra de confiança e medida aplicada."
+        }
+      ],
+      "evidences": [
+        {
+          "id": "rogerio-ev-01",
+          "title": "Termo de Oitiva e Manifestação do Empregado",
+          "type": "Termo",
+          "date": "29/06/2026",
+          "status": "Recebido com ressalva",
+          "fileName": "TERMO DE OITIVA E MANIFESTAÇÃO DO EMPREGADO.pdf",
+          "summary": "Documento registra convocação para esclarecimentos sobre desvio de rota. Campo de manifestação está em branco e o registro final não está marcado, embora haja assinaturas."
+        },
+        {
+          "id": "rogerio-ev-02",
+          "title": "Aviso de Dispensa por Justa Causa",
+          "type": "Aviso",
+          "date": "29/06/2026",
+          "status": "Recebido",
+          "fileName": "AVISO DE DISPENSA POR JUSTA CAUSA.pdf",
+          "summary": "Documento formaliza justa causa por art. 482, alínea “h”, em razão de trajeto fora da rota estipulada, desvios e evasão de rotas com pesagem."
+        }
+      ],
+      "timeline": [
+        {
+          "id": "rogerio-tl-01",
+          "date": "29/06/2026",
+          "event": "Apuração individual sobre desvio de rota",
+          "document": "Aviso de Dispensa por Justa Causa",
+          "notes": "Aviso informa apuração interna realizada em 29/06/2026."
+        },
+        {
+          "id": "rogerio-tl-02",
+          "date": "29/06/2026",
+          "event": "Oitiva do empregado",
+          "document": "Termo de Oitiva e Manifestação",
+          "notes": "Termo foi assinado, mas o campo de manifestação e registro final precisam de conferência."
+        },
+        {
+          "id": "rogerio-tl-03",
+          "date": "29/06/2026",
+          "event": "Aplicação de justa causa",
+          "document": "Aviso de Dispensa por Justa Causa",
+          "notes": "Fundamento: art. 482, alínea “h”, CLT."
+        }
+      ]
+    },
+    {
+      "id": "ueliton-andre-soares",
+      "name": "Ueliton André Soares",
+      "cpf": "058.688.884-56",
+      "role": "Motorista de caminhão",
+      "unit": "Santa Fé do Sul/SP",
+      "vehicle": "Veículo placa PQY8A58 / QPY-8A58",
+      "plate": "PQY8A58 / QPY-8A58",
+      "status": "Dossiê incompleto",
+      "investigationDate": "25/06/2026",
+      "dismissalDate": "25/06/2026",
+      "responsible": "Vinícius Alves de Lima / Newton Carlos Dourado",
+      "summary": "Apuração individual relacionada a divergência entre o peso documentado nas notas fiscais, de 37.640 kg, e o peso líquido apurado em ticket de pesagem, de 55.920 kg, em operação de frete retorno. Diferença estimada: 18.280 kg, equivalente a 18,28 toneladas. Considerando R$ 220,00 por tonelada, o prejuízo estimado é de R$ 4.021,60. Conferir divergência de grafia da placa entre documentos e anexar o aviso de justa causa, caso ainda não esteja na pasta.",
+      "checklist": [
+        {
+          "id": "ueliton-check-01",
+          "name": "Termo de Oitiva e Manifestação do Empregado",
+          "required": true,
+          "status": "Concluído",
+          "date": "25/06/2026",
+          "responsible": "RH / Comissão investigadora",
+          "notes": "Registro final indica recusa de manifestação e/ou assinatura, atestada por testemunhas. Há assinatura/nome do empregado no documento; conferir a redação para evitar ambiguidade."
+        },
+        {
+          "id": "ueliton-check-02",
+          "name": "Notas Fiscais / Documentação Fiscal",
+          "required": true,
+          "status": "Concluído",
+          "date": "22/06/2026",
+          "responsible": "Fiscal / Logística",
+          "notes": "Notas indicam quantidade/peso de 37.640 kg para a carga relacionada ao transporte."
+        },
+        {
+          "id": "ueliton-check-03",
+          "name": "Ticket de Pesagem",
+          "required": true,
+          "status": "Concluído",
+          "date": "25/06/2026",
+          "responsible": "Balança / Logística",
+          "notes": "Ticket de pesagem nº 0000128997 indica peso líquido de 55.920 kg."
+        },
+        {
+          "id": "ueliton-check-04",
+          "name": "Relatório de Apuração de Prejuízo por Divergência de Peso",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Financeiro / Logística",
+          "notes": "Base sugerida: 55.920 kg apurados - 37.640 kg documentados = 18.280 kg / 18,28 t. A R$ 220,00/t, prejuízo estimado de R$ 4.021,60."
+        },
+        {
+          "id": "ueliton-check-05",
+          "name": "Termo de Convocação / Localização do Veículo",
+          "required": true,
+          "status": "Pendente",
+          "date": "25/06/2026",
+          "responsible": "Vinícius / Newton / Logística",
+          "notes": "Registrar convocação para comparecimento à empresa e eventual acompanhamento/localização do caminhão."
+        },
+        {
+          "id": "ueliton-check-06",
+          "name": "Relatório Individual de Conclusão",
+          "required": true,
+          "status": "Pendente",
+          "date": "",
+          "responsible": "Vinícius Alves de Lima / Comissão investigadora",
+          "notes": "Consolidar divergência de peso, documentos fiscais, ticket de pesagem, oitiva/recusa, prejuízo e quebra de confiança."
+        },
+        {
+          "id": "ueliton-check-07",
+          "name": "Aviso de Dispensa por Justa Causa",
+          "required": true,
+          "status": "Pendente",
+          "date": "25/06/2026",
+          "responsible": "RH",
+          "notes": "Não veio nesta remessa. Anexar cópia assinada, se já existir na pasta."
+        },
+        {
+          "id": "ueliton-check-08",
+          "name": "Conferência de Placa nos Documentos",
+          "required": false,
+          "status": "Recomendado",
+          "date": "",
+          "responsible": "Logística / RH",
+          "notes": "Notas/ticket indicam grafias próximas PQY8A58/QPY-8A58. Conferir placa correta e registrar em relatório para evitar questionamento."
+        }
+      ],
+      "evidences": [
+        {
+          "id": "ueliton-ev-01",
+          "title": "Notas Fiscais — Walter Yukio Horita / Baruminas Agropecuária",
+          "type": "Nota fiscal",
+          "date": "22/06/2026",
+          "status": "Recebido",
+          "fileName": "NOTAS FISCAIS.pdf",
+          "summary": "Documentos fiscais indicam transporte de milheto em grãos com quantidade/peso de 37.640 kg, motorista Ueliton André Soares e CPF 058.688.884-56."
+        },
+        {
+          "id": "ueliton-ev-02",
+          "title": "Ticket de Pesagem nº 0000128997",
+          "type": "Pesagem",
+          "date": "25/06/2026",
+          "status": "Recebido",
+          "fileName": "TICKET DE PESAGEM.pdf",
+          "summary": "Ticket da balança rodoviária indica placa PQY8A58, pesagem inicial de 21.280 kg, final de 77.200 kg e peso líquido de 55.920 kg."
+        },
+        {
+          "id": "ueliton-ev-03",
+          "title": "Termo de Oitiva e Manifestação do Empregado",
+          "type": "Termo",
+          "date": "25/06/2026",
+          "status": "Recebido",
+          "fileName": "TERMO DE OITIVA E MANIFESTAÇÃO DO EMPREGADO.pdf",
+          "summary": "Documento registra que o empregado foi chamado para esclarecer divergência de peso em frete retorno. Registro final indica recusa de manifestação e/ou assinatura, com testemunhas."
+        }
+      ],
+      "timeline": [
+        {
+          "id": "ueliton-tl-01",
+          "date": "22/06/2026",
+          "event": "Emissão das notas fiscais relacionadas à carga",
+          "document": "NOTAS FISCAIS.pdf",
+          "notes": "Notas indicam quantidade/peso de 37.640 kg."
+        },
+        {
+          "id": "ueliton-tl-02",
+          "date": "25/06/2026",
+          "event": "Pesagem do veículo na balança rodoviária",
+          "document": "TICKET DE PESAGEM.pdf",
+          "notes": "Peso líquido apurado: 55.920 kg."
+        },
+        {
+          "id": "ueliton-tl-03",
+          "date": "25/06/2026",
+          "event": "Identificação da divergência de peso",
+          "document": "Notas Fiscais + Ticket de Pesagem",
+          "notes": "Diferença estimada: 18.280 kg / 18,28 t."
+        },
+        {
+          "id": "ueliton-tl-04",
+          "date": "25/06/2026",
+          "event": "Oitiva / registro de recusa",
+          "document": "Termo de Oitiva e Manifestação",
+          "notes": "Registro final indica recusa de manifestação e/ou assinatura."
+        },
+        {
+          "id": "ueliton-tl-05",
+          "date": "25/06/2026",
+          "event": "Prejuízo estimado a calcular em relatório próprio",
+          "document": "Relatório de Apuração de Prejuízo",
+          "notes": "Base sugerida: R$ 220,00 por tonelada x 18,28 t = R$ 4.021,60."
+        }
+      ]
+    }
+  ]
+};
+}
+
+function getEmployee(id){return app.employees.find(e=>e.id===id)}
+function getSelected(){return getEmployee(selectedEmployeeId)}
+function completion(emp){
+  const applicable = emp.checklist.filter(i=>i.status !== 'Não aplicável');
+  const done = applicable.filter(i=>i.status === 'Concluído').length;
+  const total = applicable.length || 1;
+  const required = emp.checklist.filter(i=>i.required && i.status !== 'Não aplicável');
+  const requiredDone = required.filter(i=>i.status === 'Concluído' || i.status === 'Recebido').length;
+  return {done,total,pct:Math.round(done/total*100),requiredDone,requiredTotal:required.length};
+}
+function render(){renderEmployees(); if(!selectedEmployeeId && app.employees.length) selectedEmployeeId = app.employees[0].id; renderSelected();}
+function renderEmployees(){
+  const list = document.getElementById('employeeList');
+  const q = document.getElementById('searchEmployee').value.toLowerCase().trim();
+  const sf = document.getElementById('statusFilter').value;
+  let employees = app.employees.filter(e => (!q || [e.name,e.cpf,e.role,e.vehicle,e.status].join(' ').toLowerCase().includes(q)) && (!sf || e.status === sf));
+  list.innerHTML = employees.map(e=>{
+    const c=completion(e);
+    return `<div class="emp-card ${e.id===selectedEmployeeId?'active':''}" onclick="selectEmployee('${e.id}')">
+      <p class="emp-name">${escapeHTML(e.name)}</p>
+      <div class="emp-meta">${escapeHTML(e.role||'Sem cargo')}<br>${escapeHTML(e.status||'Sem status')} · ${c.done}/${c.total} concluídos</div>
+      <div class="progress"><span style="width:${c.pct}%"></span></div>
+    </div>`
+  }).join('') || '<div class="empty">Nenhum funcionário encontrado.</div>';
+}
+function selectEmployee(id){selectedEmployeeId=id; renderEmployees(); renderSelected();}
+function renderSelected(){
+  const emp = getSelected();
+  document.getElementById('emptyState').style.display = emp ? 'none':'block';
+  document.getElementById('employeeArea').style.display = emp ? 'block':'none';
+  if(!emp) return;
+  const c=completion(emp);
+  document.getElementById('heroName').textContent = emp.name;
+  document.getElementById('heroChips').innerHTML = `
+    <span class="chip ${emp.status==='Concluído'||emp.status==='Justa aplicada'?'ok':emp.status==='Dossiê incompleto'?'danger':'info'}">${escapeHTML(emp.status)}</span>
+    <span class="chip info">${escapeHTML(emp.role||'Cargo não informado')}</span>
+    <span class="chip warn">${c.requiredDone}/${c.requiredTotal} obrigatórios recebidos/concluídos</span>`;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><strong>${c.pct}%</strong><span>Concluído</span></div>
+    <div class="stat"><strong>${c.done}/${c.total}</strong><span>Itens concluídos</span></div>
+    <div class="stat"><strong>${emp.evidences.length}</strong><span>Evidências</span></div>
+    <div class="stat"><strong>${emp.timeline.length}</strong><span>Eventos</span></div>`;
+  renderDataPanel(); renderChecklistPanel(); renderEvidencePanel(); renderTimelinePanel(); renderIndividualReport(false);
+}
+function setTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===id));
+}
+function renderDataPanel(){
+  const e=getSelected();
+  document.getElementById('dataPanel').innerHTML = `<div class="grid">
+    ${fieldDisplay('CPF',e.cpf)}${fieldDisplay('Cargo',e.role)}${fieldDisplay('Unidade',e.unit)}${fieldDisplay('Veículo',e.vehicle)}${fieldDisplay('Placa',e.plate)}${fieldDisplay('Data da apuração',e.investigationDate)}${fieldDisplay('Data da justa causa',e.dismissalDate)}${fieldDisplay('Responsável',e.responsible)}
+    <div class="field full"><label>Resumo do caso</label><textarea readonly>${escapeHTML(e.summary||'')}</textarea></div>
+  </div>
+  <div class="row-actions"><button class="btn primary" onclick="openEmployeeModal('${e.id}')">Editar dados do funcionário</button></div>`
+}
+function fieldDisplay(label,value){return `<div class="field"><label>${label}</label><input readonly value="${escapeHTML(value||'')}"></div>`}
+function renderChecklistPanel(){
+  const e=getSelected();
+  const items=e.checklist;
+  document.getElementById('checklistPanel').innerHTML = `<div class="toolbar"><div class="toolbar-left"><h3 style="margin:0">Checklist do dossiê</h3></div><div class="toolbar-right"><button class="btn primary" onclick="openChecklistModal()">+ Novo item</button></div></div>
+  ${items.map(i=>`<div class="checklist-item">
+    <div class="check-head">
+      <div>
+        <p class="check-title">${escapeHTML(i.name)} ${i.required?'<span class="chip danger">Obrigatório</span>':'<span class="chip">Opcional</span>'}</p>
+        <p class="check-desc"><span class="status ${statusClass[i.status]||''}">${escapeHTML(i.status)}</span> ${i.date?` · Data: ${escapeHTML(i.date)}`:''} ${i.responsible?` · Responsável: ${escapeHTML(i.responsible)}`:''}</p>
+        <p class="check-desc">${escapeHTML(i.notes||'')}</p>
+      </div>
+      <div class="check-actions">
+        <button class="btn small" onclick="quickStatus('${i.id}','Concluído')">Concluir</button>
+        <button class="btn small" onclick="openChecklistModal('${i.id}')">Editar</button>
+        <button class="btn small danger" onclick="deleteChecklist('${i.id}')">Excluir</button>
+      </div>
+    </div>
+  </div>`).join('') || '<div class="empty">Nenhum item no checklist.</div>'}`;
+}
+function renderEvidencePanel(){
+  const e=getSelected();
+  document.getElementById('evidencePanel').innerHTML = `<div class="toolbar"><div class="toolbar-left"><h3 style="margin:0">Documentos e evidências</h3></div><div class="toolbar-right"><button class="btn primary" onclick="openEvidenceModal()">+ Nova evidência</button></div></div>
+  ${e.evidences.map(ev=>`<div class="evidence-card">
+    <div class="hero-row"><div><h4>${escapeHTML(ev.title)}</h4><p><span class="status ${statusClass[ev.status]||''}">${escapeHTML(ev.status)}</span> · ${escapeHTML(ev.type||'Documento')} ${ev.date?` · ${escapeHTML(ev.date)}`:''}</p></div><div class="check-actions"><button class="btn small" onclick="openEvidenceModal('${ev.id}')">Editar</button><button class="btn small danger" onclick="deleteEvidence('${ev.id}')">Excluir</button></div></div>
+    <p><strong>Arquivo:</strong> ${escapeHTML(ev.fileName||'Não informado')}</p>
+    <p>${escapeHTML(ev.summary||'')}</p>
+  </div>`).join('') || '<div class="empty">Nenhuma evidência cadastrada.</div>'}`;
+}
+function renderTimelinePanel(){
+  const e=getSelected();
+  const sorted = [...e.timeline].sort((a,b)=>dateKey(a.date).localeCompare(dateKey(b.date)));
+  document.getElementById('timelinePanel').innerHTML = `<div class="toolbar"><div class="toolbar-left"><h3 style="margin:0">Linha do tempo</h3></div><div class="toolbar-right"><button class="btn primary" onclick="openTimelineModal()">+ Novo evento</button></div></div>
+  <div class="timeline">${sorted.map(ev=>`<div class="event"><strong>${escapeHTML(ev.date)} — ${escapeHTML(ev.event)}</strong><span>${escapeHTML(ev.document||'Sem documento vinculado')}</span><p class="hint">${escapeHTML(ev.notes||'')}</p><div class="row-actions" style="margin-top:6px"><button class="btn small" onclick="openTimelineModal('${ev.id}')">Editar</button><button class="btn small danger" onclick="deleteTimeline('${ev.id}')">Excluir</button></div></div>`).join('')}</div>`;
+}
+function dateKey(d){
+  const m=String(d||'').match(/(\d{2})\/(\d{2})\/(\d{4})/); if(!m) return '9999-99-99'+d; return `${m[3]}-${m[2]}-${m[1]}`;
+}
+function renderIndividualReport(update=true){
+  const e=getSelected(); if(!e) return;
+  const pendingRequired = e.checklist.filter(i=>i.required && !['Concluído','Recebido','Não aplicável'].includes(i.status));
+  const pendingAll = e.checklist.filter(i=>!['Concluído','Recebido','Não aplicável'].includes(i.status));
+  const c=completion(e);
+  const html = `<div class="toolbar"><div><h3 style="margin:0">Relatório individual</h3><p class="hint">Gerado em ${todayBR()}.</p></div><div class="toolbar-right"><button class="btn" onclick="copyReport()">Copiar texto</button><button class="btn primary" onclick="window.print()">Imprimir / Salvar PDF</button></div></div>
+  <div class="report-box" id="reportText">
+    <h3>Relatório Individual do Dossiê — ${escapeHTML(e.name)}</h3>
+    <p><strong>Funcionário:</strong> ${escapeHTML(e.name)}<br>
+    <strong>CPF:</strong> ${escapeHTML(e.cpf||'Não informado')}<br>
+    <strong>Cargo:</strong> ${escapeHTML(e.role||'Não informado')}<br>
+    <strong>Veículo:</strong> ${escapeHTML(e.vehicle||'Não informado')}<br>
+    <strong>Data da apuração:</strong> ${escapeHTML(e.investigationDate||'Não informada')}<br>
+    <strong>Data da justa causa:</strong> ${escapeHTML(e.dismissalDate||'Não informada')}<br>
+    <strong>Status:</strong> ${escapeHTML(e.status||'Não informado')}</p>
+    <h4>1. Resumo do caso</h4><p>${escapeHTML(e.summary||'Sem resumo cadastrado.')}</p>
+    <h4>2. Checklist do dossiê</h4><ul>${e.checklist.map(i=>`<li><strong>${escapeHTML(i.name)}</strong> — ${escapeHTML(i.status)}${i.required?' — obrigatório':''}${i.notes?`: ${escapeHTML(i.notes)}`:''}</li>`).join('')}</ul>
+    <h4>3. Evidências cadastradas</h4><ul>${e.evidences.map(ev=>`<li><strong>${escapeHTML(ev.title)}</strong> — ${escapeHTML(ev.status)}. Arquivo: ${escapeHTML(ev.fileName||'não informado')}. ${escapeHTML(ev.summary||'')}</li>`).join('') || '<li>Nenhuma evidência cadastrada.</li>'}</ul>
+    <h4>4. Linha do tempo</h4><ul>${[...e.timeline].sort((a,b)=>dateKey(a.date).localeCompare(dateKey(b.date))).map(ev=>`<li><strong>${escapeHTML(ev.date)}</strong> — ${escapeHTML(ev.event)}. Documento: ${escapeHTML(ev.document||'não informado')}. ${escapeHTML(ev.notes||'')}</li>`).join('') || '<li>Nenhum evento cadastrado.</li>'}</ul>
+    <h4>5. Pendências</h4>${pendingAll.length?`<ul>${pendingAll.map(i=>`<li>${escapeHTML(i.name)} — ${escapeHTML(i.status)}${i.required?' — obrigatório':''}</li>`).join('')}</ul>`:'<p>Não há pendências cadastradas.</p>'}
+    <h4>6. Conclusão automática do status</h4>
+    <p>O dossiê individual encontra-se com ${c.done} de ${c.total} itens concluídos, equivalente a ${c.pct}%. Dos itens obrigatórios, ${c.requiredDone} de ${c.requiredTotal} estão recebidos ou concluídos. ${pendingRequired.length ? 'Permanecem pendentes itens obrigatórios que devem ser regularizados antes do encerramento formal do dossiê.' : 'Não há pendência obrigatória apontada pelo checklist.'}</p>
+  </div>`;
+  document.getElementById('reportPanel').innerHTML = html;
+}
+
+function openModal(title,body,foot){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modalFoot').innerHTML=foot;document.getElementById('modalBack').style.display='flex'}
+function closeModal(){document.getElementById('modalBack').style.display='none'}
+function val(id){return document.getElementById(id)?.value || ''}
+function checked(id){return document.getElementById(id)?.checked || false}
+
+function openEmployeeModal(id=null){
+  const e = id ? getEmployee(id) : {name:'',cpf:'',role:'',unit:'',vehicle:'',plate:'',status:'Em montagem',investigationDate:'',dismissalDate:'',responsible:'',summary:''};
+  const body = `<div class="grid">
+    <div class="field full"><label>Nome completo</label><input id="empName" value="${escapeHTML(e.name)}"></div>
+    <div class="field"><label>CPF</label><input id="empCpf" value="${escapeHTML(e.cpf)}"></div>
+    <div class="field"><label>Cargo</label><input id="empRole" value="${escapeHTML(e.role)}"></div>
+    <div class="field"><label>Unidade</label><input id="empUnit" value="${escapeHTML(e.unit)}"></div>
+    <div class="field"><label>Status</label><select id="empStatus">${['Em montagem','Dossiê incompleto','Justa aplicada','Concluído','Arquivado'].map(s=>`<option ${e.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+    <div class="field"><label>Veículo</label><input id="empVehicle" value="${escapeHTML(e.vehicle)}"></div>
+    <div class="field"><label>Placa</label><input id="empPlate" value="${escapeHTML(e.plate)}"></div>
+    <div class="field"><label>Data da apuração</label><input id="empInvestigationDate" value="${escapeHTML(e.investigationDate)}" placeholder="dd/mm/aaaa"></div>
+    <div class="field"><label>Data da justa causa</label><input id="empDismissalDate" value="${escapeHTML(e.dismissalDate)}" placeholder="dd/mm/aaaa"></div>
+    <div class="field full"><label>Responsável pela apuração</label><input id="empResponsible" value="${escapeHTML(e.responsible)}"></div>
+    <div class="field full"><label>Resumo do caso</label><textarea id="empSummary">${escapeHTML(e.summary)}</textarea></div>
+  </div>`;
+  const foot = `<button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveEmployee('${id||''}')">Salvar</button>`;
+  openModal(id?'Editar funcionário':'Novo funcionário',body,foot);
+}
+function saveEmployee(id){
+  const data = {name:val('empName'),cpf:val('empCpf'),role:val('empRole'),unit:val('empUnit'),status:val('empStatus'),vehicle:val('empVehicle'),plate:val('empPlate'),investigationDate:val('empInvestigationDate'),dismissalDate:val('empDismissalDate'),responsible:val('empResponsible'),summary:val('empSummary')};
+  if(!data.name.trim()){toast('Informe o nome do funcionário.');return}
+  if(id){Object.assign(getEmployee(id),data)}
+  else{
+    const emp={id:uid(),...data,checklist:defaultChecklist(),evidences:[],timeline:[]};
+    app.employees.push(emp); selectedEmployeeId=emp.id;
+  }
+  save(); closeModal(); render(); toast('Funcionário salvo.');
+}
+function defaultChecklist(){return [
+  {id:uid(), name:'Termo de Oitiva / Recusa de Manifestação', required:true, status:'Pendente', date:'', responsible:'RH / Comissão investigadora', notes:''},
+  {id:uid(), name:'Relatório de Prejuízo Financeiro ou Operacional', required:true, status:'Pendente', date:'', responsible:'Financeiro / Logística / Frota', notes:''},
+  {id:uid(), name:'Relatório Individual de Conclusão', required:true, status:'Pendente', date:'', responsible:'Comissão investigadora', notes:''},
+  {id:uid(), name:'Aviso de Dispensa por Justa Causa', required:true, status:'Pendente', date:'', responsible:'RH', notes:''}
+]}
+function deleteEmployee(id){
+  const e=getEmployee(id); if(!e) return;
+  if(!confirm(`Excluir o dossiê de ${e.name}? Esta ação não pode ser desfeita.`)) return;
+  app.employees=app.employees.filter(x=>x.id!==id); selectedEmployeeId=app.employees[0]?.id || null; save(); render(); toast('Funcionário excluído.');
+}
+function openChecklistModal(id=null){
+  const e=getSelected(); const i = id ? e.checklist.find(x=>x.id===id) : {name:'',required:true,status:'Pendente',date:'',responsible:'',notes:''};
+  const body = `<div class="grid"><div class="field full"><label>Item</label><input id="clName" value="${escapeHTML(i.name)}"></div><div class="field"><label>Status</label><select id="clStatus">${docStatuses.map(s=>`<option ${i.status===s?'selected':''}>${s}</option>`).join('')}</select></div><div class="field"><label>Data</label><input id="clDate" value="${escapeHTML(i.date)}"></div><div class="field full"><label>Responsável</label><input id="clResponsible" value="${escapeHTML(i.responsible)}"></div><div class="field"><label><input type="checkbox" id="clRequired" ${i.required?'checked':''}> Obrigatório</label></div><div class="field full"><label>Observação</label><textarea id="clNotes">${escapeHTML(i.notes)}</textarea></div></div>`;
+  const foot = `<button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveChecklist('${id||''}')">Salvar</button>`;
+  openModal(id?'Editar item do checklist':'Novo item do checklist',body,foot);
+}
+function saveChecklist(id){
+  const e=getSelected(); const data={name:val('clName'),status:val('clStatus'),date:val('clDate'),responsible:val('clResponsible'),required:checked('clRequired'),notes:val('clNotes')};
+  if(!data.name.trim()){toast('Informe o nome do item.');return}
+  if(id) Object.assign(e.checklist.find(x=>x.id===id),data); else e.checklist.push({id:uid(),...data});
+  save(); closeModal(); renderSelected(); renderEmployees(); toast('Checklist atualizado.');
+}
+function quickStatus(id,status){const e=getSelected(); const i=e.checklist.find(x=>x.id===id); if(i){i.status=status; if(!i.date) i.date=todayBR(); save(); renderSelected(); renderEmployees();}}
+function deleteChecklist(id){const e=getSelected(); if(confirm('Excluir este item do checklist?')){e.checklist=e.checklist.filter(x=>x.id!==id); save(); renderSelected(); renderEmployees();}}
+function openEvidenceModal(id=null){
+  const e=getSelected(); const ev=id ? e.evidences.find(x=>x.id===id) : {title:'',type:'Documento',date:'',status:'Recebido',fileName:'',summary:''};
+  const body = `<div class="grid"><div class="field full"><label>Título</label><input id="evTitle" value="${escapeHTML(ev.title)}"></div><div class="field"><label>Tipo</label><input id="evType" value="${escapeHTML(ev.type)}"></div><div class="field"><label>Status</label><select id="evStatus">${docStatuses.map(s=>`<option ${ev.status===s?'selected':''}>${s}</option>`).join('')}</select></div><div class="field"><label>Data</label><input id="evDate" value="${escapeHTML(ev.date)}"></div><div class="field full"><label>Nome do arquivo / referência</label><input id="evFileName" value="${escapeHTML(ev.fileName)}"></div><div class="field full"><label>Resumo do que prova</label><textarea id="evSummary">${escapeHTML(ev.summary)}</textarea></div></div>`;
+  const foot = `<button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveEvidence('${id||''}')">Salvar</button>`;
+  openModal(id?'Editar evidência':'Nova evidência',body,foot);
+}
+function saveEvidence(id){const e=getSelected(); const data={title:val('evTitle'),type:val('evType'),status:val('evStatus'),date:val('evDate'),fileName:val('evFileName'),summary:val('evSummary')}; if(!data.title.trim()){toast('Informe o título da evidência.');return} if(id) Object.assign(e.evidences.find(x=>x.id===id),data); else e.evidences.push({id:uid(),...data}); save(); closeModal(); renderSelected(); toast('Evidência salva.');}
+function deleteEvidence(id){const e=getSelected(); if(confirm('Excluir esta evidência?')){e.evidences=e.evidences.filter(x=>x.id!==id); save(); renderSelected();}}
+function openTimelineModal(id=null){
+  const e=getSelected(); const ev=id ? e.timeline.find(x=>x.id===id) : {date:'',event:'',document:'',notes:''};
+  const body = `<div class="grid"><div class="field"><label>Data</label><input id="tlDate" value="${escapeHTML(ev.date)}" placeholder="dd/mm/aaaa"></div><div class="field"><label>Documento vinculado</label><input id="tlDoc" value="${escapeHTML(ev.document)}"></div><div class="field full"><label>Evento</label><input id="tlEvent" value="${escapeHTML(ev.event)}"></div><div class="field full"><label>Observação</label><textarea id="tlNotes">${escapeHTML(ev.notes)}</textarea></div></div>`;
+  const foot = `<button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveTimeline('${id||''}')">Salvar</button>`;
+  openModal(id?'Editar evento':'Novo evento',body,foot);
+}
+function saveTimeline(id){const e=getSelected(); const data={date:val('tlDate'),event:val('tlEvent'),document:val('tlDoc'),notes:val('tlNotes')}; if(!data.event.trim()){toast('Informe o evento.');return} if(id) Object.assign(e.timeline.find(x=>x.id===id),data); else e.timeline.push({id:uid(),...data}); save(); closeModal(); renderSelected(); toast('Linha do tempo atualizada.');}
+function deleteTimeline(id){const e=getSelected(); if(confirm('Excluir este evento?')){e.timeline=e.timeline.filter(x=>x.id!==id); save(); renderSelected();}}
+
+function openGeneralInvestigation(){
+  const inv=app.investigation;
+  const body=`<div class="grid"><div class="field full"><label>Título</label><input id="invTitle" value="${escapeHTML(inv.title)}"></div><div class="field"><label>Empresa</label><input id="invCompany" value="${escapeHTML(inv.company)}"></div><div class="field"><label>Data de abertura</label><input id="invStart" value="${escapeHTML(inv.startDate)}"></div><div class="field full"><label>Observações gerais</label><textarea id="invNotes">${escapeHTML(inv.notes)}</textarea></div></div><div class="divider"></div><h4>Documentos da investigação geral</h4><div class="table-wrap"><table><thead><tr><th>Código</th><th>Documento</th><th>Status</th><th>Responsável</th><th>Data</th></tr></thead><tbody>${inv.documents.map(d=>`<tr><td>${escapeHTML(d.code)}</td><td><strong>${escapeHTML(d.name)}</strong><br><span class="hint">${escapeHTML(d.notes||'')}</span></td><td><select onchange="updateInvDoc('${d.id}','status',this.value)">${docStatuses.map(s=>`<option ${d.status===s?'selected':''}>${s}</option>`).join('')}</select></td><td><input value="${escapeHTML(d.responsible)}" onchange="updateInvDoc('${d.id}','responsible',this.value)"></td><td><input value="${escapeHTML(d.date)}" onchange="updateInvDoc('${d.id}','date',this.value)"></td></tr>`).join('')}</tbody></table></div>`;
+  const foot=`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn primary" onclick="saveInvestigation()">Salvar investigação</button>`;
+  openModal('Investigação Geral',body,foot);
+}
+function updateInvDoc(id,key,value){const d=app.investigation.documents.find(x=>x.id===id); if(d){d[key]=value; save();}}
+function saveInvestigation(){app.investigation.title=val('invTitle');app.investigation.company=val('invCompany');app.investigation.startDate=val('invStart');app.investigation.notes=val('invNotes');save();closeModal();toast('Investigação geral salva.');}
+function generateGeneralReport(){
+  const rows = app.employees.map(e=>{const c=completion(e); return `<tr><td>${escapeHTML(e.name)}</td><td>${escapeHTML(e.status)}</td><td>${c.done}/${c.total} (${c.pct}%)</td><td>${e.checklist.filter(i=>i.required && !['Concluído','Recebido','Não aplicável'].includes(i.status)).map(i=>escapeHTML(i.name)).join('<br>') || 'Sem pendência obrigatória'}</td></tr>`}).join('');
+  const body=`<div class="report-box" id="generalReport"><h3>Relatório Geral da Investigação</h3><p><strong>${escapeHTML(app.investigation.title)}</strong><br><strong>Empresa:</strong> ${escapeHTML(app.investigation.company)}<br><strong>Abertura:</strong> ${escapeHTML(app.investigation.startDate)}</p><p>${escapeHTML(app.investigation.notes)}</p><h4>Documentos da investigação geral</h4><ul>${app.investigation.documents.map(d=>`<li><strong>${escapeHTML(d.code)} — ${escapeHTML(d.name)}</strong>: ${escapeHTML(d.status)}. Responsável: ${escapeHTML(d.responsible||'não informado')}.</li>`).join('')}</ul><h4>Dossiês individuais</h4><div class="table-wrap"><table><thead><tr><th>Funcionário</th><th>Status</th><th>Conclusão</th><th>Pendências obrigatórias</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+  const foot=`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('generalReport').innerText); toast('Relatório copiado.')">Copiar</button><button class="btn primary" onclick="window.print()">Imprimir / Salvar PDF</button>`;
+  openModal('Relatório Geral',body,foot);
+}
+function copyReport(){const el=document.getElementById('reportText'); if(el) navigator.clipboard.writeText(el.innerText).then(()=>toast('Relatório copiado.'))}
+function exportJSON(){const blob=new Blob([JSON.stringify(app,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='backup_dossies_justa_causa.json'; a.click(); URL.revokeObjectURL(a.href);}
+function importJSON(event){const file=event.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); if(!data.employees || !data.investigation) throw new Error('Formato inválido'); app=data; selectedEmployeeId=app.employees[0]?.id||null; save(); render(); toast('Backup importado.')}catch(e){alert('Arquivo inválido.')}}; reader.readAsText(file); event.target.value='';}
+
+render();
+initFirebaseSync();
+</script>
+</body>
+</html>
